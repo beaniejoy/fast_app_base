@@ -47,3 +47,38 @@ FutureOr<void> afterFirstLayout(BuildContext context) {
 }
 ```
 splash 화면을 preserve 한 후 메인 스크린에서 remove 처리함으로써 자연스럽게 넘길 수 있음
+
+## 알림 화면 구성
+
+```dart
+return Scaffold(
+  body: CustomScrollView(
+    slivers: [],
+  ),
+)
+```
+stack 이라면 가장 위에 있는 영역이 가장 아래에 깔리는  
+slivers는 반대라고 생각하면 됨  
+밖에 Scaffold로 감싸줘야 함
+
+`DialogWidget` 은 직접 개발하신 내용
+
+```yaml
+timeago: ^3.6.0
+```
+`timeago`라는 library (입력받은 time이 현재 기준 몇 분, 시간 전인지 언어별로 알려주는 라이브러리)
+```dart
+import 'package:timeago/timeago.dart' as timeago;
+
+void main() {
+  //...
+  timeago.setLocaleMessages('ko', timeago.KoMessages());
+}
+
+// w_notification_item.dart
+timeago.format(widget.notification.time,locale: context.locale.languageCode).text
+```
+bootstrap main 함수에서 설정할 언어를 적용해준다.
+
+
+그리고 보통 List 안에 반복되는 위젯에 대해서는 class 이름에 Item을 포함한다. 
