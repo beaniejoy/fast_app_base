@@ -1,6 +1,7 @@
 # fast_app_base
 
 A new Flutter project.
+([ttoss app repo](https://github.com/fastcampus-flutter/part3_chapter2_ttoss))
 
 <br>
 
