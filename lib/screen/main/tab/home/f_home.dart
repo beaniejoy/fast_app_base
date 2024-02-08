@@ -19,51 +19,48 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        children: [
-          RefreshIndicator(
-            edgeOffset: TtossAppBar.appBarHeight,
-            onRefresh: () async {
-              await sleepAsync(500.ms);
-            },
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(
-                top: TtossAppBar.appBarHeight, // 최대한 매직 넘버가 없게 하는 것이 중요
-                bottom: MainScreenState.bottomNavigatorHeight,
-              ),
-              child: Column(
-                children: [
-                  Column(
-                    children: [
-                      BigButton(
-                        "토스 뱅크",
-                        onTap: () => context.showSnackbar("토스뱅크를 눌렀어요."),
+    return Stack(
+      children: [
+        RefreshIndicator(
+          edgeOffset: TtossAppBar.appBarHeight,
+          onRefresh: () async {
+            await sleepAsync(500.ms);
+          },
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              top: TtossAppBar.appBarHeight, // 최대한 매직 넘버가 없게 하는 것이 중요
+              bottom: MainScreenState.bottomNavigatorHeight,
+            ),
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    BigButton(
+                      "토스 뱅크",
+                      onTap: () => context.showSnackbar("토스뱅크를 눌렀어요."),
+                    ),
+                    height10,
+                    RoundedContainer(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          "자산".text.bold.white.make(),
+                          height5,
+                          ...bankAccounts
+                              .map((bankAccount) =>
+                                  BankAccountWidget(bankAccount))
+                              .toList(),
+                        ],
                       ),
-                      height10,
-                      RoundedContainer(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            "자산".text.bold.white.make(),
-                            height5,
-                            ...bankAccounts
-                                .map((bankAccount) =>
-                                    BankAccountWidget(bankAccount))
-                                .toList(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ).pSymmetric(h: 20),
-                ],
-              ),
+                    ),
+                  ],
+                ).pSymmetric(h: 20),
+              ],
             ),
           ),
-          const TtossAppBar(),
-        ],
-      ),
+        ),
+        const TtossAppBar(),
+      ],
     );
   }
 

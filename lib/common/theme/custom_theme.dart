@@ -36,13 +36,12 @@ ThemeData lightTheme = ThemeData(
   primarySwatch: primarySwatchColor,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.light,
-  // textTheme: CustomGoogleFonts.diphylleiaTextTheme(
+  // textTheme: GoogleFonts.singleDayTextTheme(
   //   ThemeData(brightness: Brightness.light).textTheme,
   // ),
   colorScheme: const ColorScheme.light(background: Colors.white),
 );
 
-const darkColorSeed = Color(0xbcd5ff7e);
 ThemeData darkTheme = ThemeData(
   primarySwatch: primarySwatchColor,
   visualDensity: VisualDensity.adaptivePlatformDensity,
