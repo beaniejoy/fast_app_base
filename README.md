@@ -82,4 +82,10 @@ timeago.format(widget.notification.time,locale: context.locale.languageCode).tex
 bootstrap main 함수에서 설정할 언어를 적용해준다.
 
 
-그리고 보통 List 안에 반복되는 위젯에 대해서는 class 이름에 Item을 포함한다. 
+그리고 보통 List 안에 반복되는 위젯에 대해서는 class 이름에 Item을 포함한다.
+
+<br>
+
+## 설정 화면 구성
+
+Rx 관련 Preferences (`Prefs` 참고)

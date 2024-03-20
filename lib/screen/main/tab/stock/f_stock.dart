@@ -3,6 +3,7 @@ import 'package:fast_app_base/common/widget/w_image_button.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_ttoss_app_bar.dart';
 import 'package:fast_app_base/screen/main/tab/stock/search/s_search_stock.dart';
+import 'package:fast_app_base/screen/main/tab/stock/setting/s_setting.dart';
 import 'package:fast_app_base/screen/main/tab/stock/tab/f_my_stock.dart';
 import 'package:fast_app_base/screen/main/tab/stock/tab/f_today_discovery.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
               ),
               ImageButton(
                 imagePath: '$basePath/icon/stock_settings.png',
-                onTap: () => context.showSnackbar("설정"),
+                onTap: () => Nav.push(const SettingScreen()),
               ),
             ],
           ),
