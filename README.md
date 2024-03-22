@@ -89,3 +89,12 @@ bootstrap main 함수에서 설정할 언어를 적용해준다.
 ## 설정 화면 구성
 
 Rx 관련 Preferences (`Prefs` 참고)
+
+<br>
+
+## 출시전 참고
+
+```yaml
+dev_dependencies:
+  change_app_package_name: ^1.1.0
+```

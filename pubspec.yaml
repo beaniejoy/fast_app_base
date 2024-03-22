@@ -93,6 +93,8 @@ dev_dependencies:
   flutter_oss_licenses: ^2.0.1
   test: ^1.22.0
 
+  # 앱 출시할 때 꼭 필요
+  change_app_package_name: ^1.1.0
 
 
 # For information on the generic Dart part of this file, see the

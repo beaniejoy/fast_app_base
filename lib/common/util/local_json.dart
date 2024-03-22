@@ -32,15 +32,12 @@ class LocalJson {
 }
 
 T _tryConverting<T>(dynamic json) {
-  // switch (T) {
-  //   case Package:
-  //     return Package.fromJson(json) as T;
-  //   default:
-  //     throw Exception("Please check _tryConverting method");
-  // }
   switch (T) {
+    case Package:
+      return Package.fromJson(json) as T;
     case SimpleStock:
-    default:
       return SimpleStock.fromJson(json) as T;
+    default:
+      throw Exception("Please check _tryConverting method");
   }
 }
