@@ -1,4 +1,3 @@
-import 'package:fast_app_base/common/cli_common.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_big_button.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
@@ -6,21 +5,36 @@ import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/home/bank_accounts_dummy.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_bank_account.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_rive_like_button.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_ttoss_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:live_background/live_background.dart';
+import 'package:live_background/widget/live_background_widget.dart';
 
 import '../../../dialog/d_color_bottom.dart';
 import '../../../dialog/d_confirm.dart';
 
-class HomeFragment extends StatelessWidget {
+class HomeFragment extends StatefulWidget {
   const HomeFragment({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends State<HomeFragment> {
+  bool isLike = false;
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        const LiveBackgroundWidget(
+          palette: Palette(colors: [Colors.red, Colors.green]),
+          velocityX: 1,
+          particleMaxSize: 20,
+        ),
         RefreshIndicator(
           edgeOffset: TtossAppBar.appBarHeight,
           onRefresh: () async {
@@ -33,30 +47,34 @@ class HomeFragment extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Column(
-                  children: [
-                    BigButton(
-                      "토스 뱅크",
-                      onTap: () => context.showSnackbar("토스뱅크를 눌렀어요."),
-                    ),
-                    height10,
-                    RoundedContainer(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          "자산".text.bold.white.make(),
-                          height5,
-                          ...bankAccounts
-                              .map((bankAccount) =>
-                                  BankAccountWidget(bankAccount))
-                              .toList(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ).pSymmetric(h: 20),
+                SizedBox(
+                  height: 250,
+                  width: 250,
+                  child: RiveLikeButton(
+                    isLike,
+                    onTapLike: (isLike) => setState(() {
+                      // setState에 의해 isLike가 변하게 되면 build가 다시 일어나게 된다.
+                      this.isLike = isLike;
+                    }),
+                  ),
+                ),
+                BigButton(
+                  "토스 뱅크",
+                  onTap: () => context.showSnackbar("토스뱅크를 눌렀어요."),
+                ),
+                height10,
+                RoundedContainer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      "자산".text.bold.white.make(),
+                      height5,
+                      ...bankAccounts.map((bankAccount) => BankAccountWidget(bankAccount)).toList(),
+                    ],
+                  ),
+                ),
               ],
-            ),
+            ).pSymmetric(h: 20).animate().slideY(duration: 2000.ms).fadeIn(),
           ),
         ),
         const TtossAppBar(),
@@ -70,13 +88,7 @@ class HomeFragment extends StatelessWidget {
           onTap: () {
             context.showErrorSnackbar('error');
           },
-          child: '에러 보여주기 버튼'
-              .text
-              .white
-              .size(13)
-              .make()
-              .centered()
-              .pSymmetric(h: 10, v: 5),
+          child: '에러 보여주기 버튼'.text.white.size(13).make().centered().pSymmetric(h: 10, v: 5),
         ));
   }
 

@@ -7,6 +7,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:nav/nav.dart';
 export 'package:quiver/strings.dart';
 export 'package:velocity_x/velocity_x.dart';
+export 'package:flutter_animate/flutter_animate.dart';
 
 export 'package:fast_app_base/common/dart/extension/animation_controller_extension.dart';
 export 'package:fast_app_base/common/dart/extension/collection_extension.dart';
