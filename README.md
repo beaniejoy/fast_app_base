@@ -98,3 +98,12 @@ Rx 관련 Preferences (`Prefs` 참고)
 dev_dependencies:
   change_app_package_name: ^1.1.0
 ```
+
+<br>
+
+## Advanced Dart
+
+firebase crashlytics 참고  
+로직의 흐름과 예외처리를 잘 제어하는 것
+
+`bank_accounts_dummy.dart` 파일 참고
