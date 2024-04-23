@@ -205,10 +205,10 @@ packages:
     dependency: transitive
     description:
       name: coverage
-      sha256: "2fb815080e44a09b85e0f2ca8a820b15053982b2e714b59267719e8a9ff17097"
+      sha256: "8acabb8306b57a409bf4c83522065672ee13179297a6bb0cb9ead73948df7c76"
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.3"
+    version: "1.7.2"
   crypto:
     dependency: transitive
     description:
@@ -813,6 +813,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  rive:
+    dependency: "direct main"
+    description:
+      name: rive
+      sha256: ec44b6cf7341e21727c4b0e762f4ac82f9a45f7e52df3ebad2d1289a726fbaaf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.1"
+  rive_common:
+    dependency: transitive
+    description:
+      name: rive_common
+      sha256: "0f070bc0e764c570abd8b34d744ef30d1292bd4051f2e0951bbda755875fce6a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3"
   rxdart:
     dependency: transitive
     description:
@@ -1142,10 +1158,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f3743ca475e0c9ef71df4ba15eb2d7684eecd5c8ba20a462462e4e8b561b2e11
+      sha256: b3d56ff4341b8f182b96aceb2fa20e3dcb336b9f867bc0eafc0de10f1048e957
       url: "https://pub.dev"
     source: hosted
-    version: "11.6.0"
+    version: "13.0.0"
   vxstate:
     dependency: transitive
     description:
