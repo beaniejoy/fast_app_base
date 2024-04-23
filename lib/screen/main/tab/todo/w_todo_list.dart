@@ -8,7 +8,7 @@ class TodoList extends StatelessWidget with TodoDataProvider {
   TodoList({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     // GetBuilder로 사용가능(그러나 하나만 받을 수 있어서 잘 사용 X)
     return Obx(
       () => todoData.todoList.isEmpty
