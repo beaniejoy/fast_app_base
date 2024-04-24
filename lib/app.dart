@@ -1,9 +1,8 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/custom_theme_app.dart';
-import 'package:fast_app_base/data/memory/todo_data_notifier.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'common/theme/custom_theme.dart';
 
@@ -27,7 +26,6 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    Get.put(TodoDataHolder());
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -42,14 +40,18 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return CustomThemeApp(
       child: Builder(builder: (context) {
-        return MaterialApp(
-          navigatorKey: App.navigatorKey,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          title: 'Image Finder',
-          theme: context.themeType.themeData,
-          home: const MainScreen(),
+        // BlocProvider 안에서 cubit에 들어간 데이터 접근 가능
+        return BlocProvider(
+          create: (BuildContext context) => TodoCubit(),
+          child: MaterialApp(
+            navigatorKey: App.navigatorKey,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: 'Image Finder',
+            theme: context.themeType.themeData,
+            home: const MainScreen(),
+          ),
         );
       }),
     );
