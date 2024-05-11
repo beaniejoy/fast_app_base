@@ -11,7 +11,7 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // GetBuilder로 사용가능(그러나 하나만 받을 수 있어서 잘 사용 X)
-    return BlocBuilder<TodoCubit, TodoBlocState>(
+    return BlocBuilder<TodoBloc, TodoBlocState>(
       builder: (context, state) => state.todoList.isEmpty
           ? '할일을 작성해보세요'.text.size(30).makeCentered()
           : Column(

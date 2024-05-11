@@ -42,7 +42,7 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
       child: Builder(builder: (context) {
         // BlocProvider 안에서 cubit에 들어간 데이터 접근 가능
         return BlocProvider(
-          create: (BuildContext context) => TodoCubit(),
+          create: (BuildContext context) => TodoBloc(),
           child: MaterialApp(
             navigatorKey: App.navigatorKey,
             localizationsDelegates: context.localizationDelegates,

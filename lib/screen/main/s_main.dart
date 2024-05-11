@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/memory/bloc/todo_event.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            context.readTodoCubit.addTodo();
+            context.readTodoBloc.add(TodoAddEvent());
           },
           child: const Icon(EvaIcons.plus),
         ),
