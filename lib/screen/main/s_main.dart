@@ -3,17 +3,28 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'w_menu_drawer.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class MainScreenWrapper extends StatelessWidget {
+  const MainScreenWrapper({super.key});
 
   @override
-  State<MainScreen> createState() => MainScreenState();
+  Widget build(BuildContext context) {
+    // ProviderScope에 따라 Riverpod의 데이터를 공유하게 된다.
+    return const ProviderScope(child: _MainScreen());
+  }
 }
 
-class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin, TodoDataProvider {
+class _MainScreen extends ConsumerStatefulWidget {
+  const _MainScreen({super.key});
+
+  @override
+  ConsumerState<_MainScreen> createState() => MainScreenState();
+}
+
+class MainScreenState extends ConsumerState<_MainScreen> with SingleTickerProviderStateMixin {
   TabItem _currentTab = TabItem.todo;
   final tabs = [TabItem.todo, TabItem.search];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
@@ -51,7 +62,8 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            todoData.addTodo();
+            // holder 접근만 필요
+            ref.readTodoHolder.addTodo();
           },
           child: const Icon(EvaIcons.plus),
         ),

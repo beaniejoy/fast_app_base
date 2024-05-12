@@ -1,14 +1,26 @@
 import 'package:fast_app_base/screen/dialog/d_confirm.dart';
 import 'package:fast_app_base/screen/main/write/d_write_todo.dart';
-import 'package:get/get.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'todo_status.dart';
 import 'vo_todo.dart';
 
-// InheritedWidget을 상속받은 것이기에 위젯 트리 구조를 잘 봐야한다.
-// holder를 선언한 위젯의 상위 위젯에 대해서는 해당 notifier에 접근 불가
-class TodoDataHolder extends GetxController {
-  final RxList<Todo> todoList = <Todo>[].obs;
+final userProvider = FutureProvider<String>((ref) => 'abc');
+
+// 전역 변수로 설정되어 있어도 ProviderScope에 따라 데이터 공간 분리
+// 선언한 거라 생각하면 됨
+final todoDataProvider = StateNotifierProvider<TodoDataHolder, List<Todo>>((ref) {
+  // refresh(userProvider); > 실행 이후 watch가 동작하게 됨, 새로운 userId 가져옴
+  final userId = ref.watch(userProvider);
+  debugPrint(userId.value!);
+  // 새로운 userId에 해당하는 DataHolder를 새로 세팅 가능
+  return TodoDataHolder();
+});
+
+class TodoDataHolder extends StateNotifier<List<Todo>> {
+  // 초기 구성은 비어있는 List로 시작
+  TodoDataHolder() : super([]);
 
   void changeTodoStatus(Todo todo) async {
     switch (todo.status) {
@@ -23,21 +35,21 @@ class TodoDataHolder extends GetxController {
         });
     }
 
-    // Rx를 관찰하고 있는 Obs 위젯 내부에서 빌드가 다시 일어난다.
-    todoList.refresh();
+    state = List.of(state);
   }
 
   // method 안에서는 await 이후 보장됨
   void addTodo() async {
     final result = await WriteTodoDialog().show();
     if (result != null) {
-      todoList.add(
+      state.add(
         Todo(
           id: DateTime.now().millisecondsSinceEpoch,
           title: result.text,
           dueDate: result.dateTime,
         ),
       );
+      state = List.of(state);
     }
   }
 
@@ -46,16 +58,16 @@ class TodoDataHolder extends GetxController {
     if (result != null) {
       todo.title = result.text;
       todo.dueDate = result.dateTime;
-      todoList.refresh();
+      state = List.of(state);
     }
   }
 
   void removeTodo(Todo todo) {
-    todoList.remove(todo);
-    todoList.refresh();
+    state.remove(todo);
+    state = List.of(state);
   }
 }
 
-mixin class TodoDataProvider {
-  late final TodoDataHolder todoData = Get.find();
+extension TodoListHolderProvider on WidgetRef {
+  TodoDataHolder get readTodoHolder => read(todoDataProvider.notifier);
 }
