@@ -111,7 +111,7 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
             '화면 띄우기'.tr(),
             onTap: () async {
 
-              Nav.push(MainScreenWrapper());
+              Nav.push(const MainScreenWrapper());
             },
           ),
           const Line(),

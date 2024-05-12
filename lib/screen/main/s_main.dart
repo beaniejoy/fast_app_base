@@ -18,7 +18,7 @@ class MainScreenWrapper extends StatelessWidget {
 }
 
 class _MainScreen extends ConsumerStatefulWidget {
-  const _MainScreen({super.key});
+  const _MainScreen();
 
   @override
   ConsumerState<_MainScreen> createState() => MainScreenState();
